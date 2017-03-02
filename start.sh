@@ -1,5 +1,6 @@
 #!/bin/bash
 
+FPM_PORT_9000_TCP_ADDR="${FPM_PORT_9000_TCP_ADDR:-fpm}"
 sed -i "s/%fpm-ip%/$FPM_PORT_9000_TCP_ADDR/" /usr/local/apache2/conf/httpd.conf
 
 if [ ! -e "/usr/local/apache2/conf/dhparam.pem" ]
