@@ -3,6 +3,11 @@
 FPM_PORT_9000_TCP_ADDR="${FPM_PORT_9000_TCP_ADDR:-fpm}"
 sed -i "s/%fpm-ip%/$FPM_PORT_9000_TCP_ADDR/" /usr/local/apache2/conf/httpd.conf
 
+if [ -e "$HTTPD_DOCUMENT_ROOT" ]
+then
+    sed -i "s:/usr/local/apache2/htdocs:$HTTPD_DOCUMENT_ROOT:g" /usr/local/apache2/conf/httpd.conf
+fi
+
 if [ ! -e "/usr/local/apache2/conf/dhparam.pem" ]
 then
   openssl dhparam -out "/usr/local/apache2/conf/dhparam.pem" 2048 2>/dev/null

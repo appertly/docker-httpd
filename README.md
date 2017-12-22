@@ -3,7 +3,7 @@ Docker image of httpd with more throrough settings and a FastCGI connection to a
 
 ## General config
 
-The content root is configured for the httpd image default, which is `/usr/local/apache2/htdocs`.
+The content root is configured for the httpd image default, which is `/usr/local/apache2/htdocs`. You can change the `DocumentRoot` by specifying the `HTTPD_DOCUMENT_ROOT` environment variable.
 
 ## PHP/HHVM
 
