@@ -1,8 +1,5 @@
 #!/bin/bash
 
-FPM_PORT_9000_TCP_ADDR="${FPM_PORT_9000_TCP_ADDR:-fpm}"
-sed -i "s/%fpm-ip%/$FPM_PORT_9000_TCP_ADDR/" /usr/local/apache2/conf/httpd.conf
-
 if [ -e "$HTTPD_DOCUMENT_ROOT" ]
 then
     sed -i "s:/usr/local/apache2/htdocs:$HTTPD_DOCUMENT_ROOT:g" /usr/local/apache2/conf/httpd.conf
@@ -27,4 +24,23 @@ update-ca-certificates 2>/dev/null
 # Apache gets grumpy about PID files pre-existing
 rm -f /usr/local/apache2/logs/httpd.pid
 
-exec httpd -DFOREGROUND
+set -e 
+
+mkdir /var/log/apache2
+chown www-data:www-data /var/log/apache2
+cd /app
+    chown -R www-data:www-data ./
+    chmod -R +x ./
+    pip install -r requirements.txt
+    pip uninstall --yes celery
+cd celery-master/
+    python3.6 setup.py install 
+cd ..
+    python3.6 manage.py makemigrations
+    python3.6 manage.py migrate
+    python3.6 manage.py collectstatic --no-input
+cd /static 
+    chown -R www-data:www-data ./
+    chmod -R +x ./
+cd /app
+(httpd -DFOREGROUNDn && sleep 10 && celery -A api.celery worker --beat -l info --scheduler django_celery_beat.schedulers:DatabaseScheduler)
