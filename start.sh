@@ -24,6 +24,22 @@ fi
 
 update-ca-certificates 2>/dev/null
 
+set -e
+
+mkdir /var/log/apache2
+chown www-data:www-data /var/log/apache2
+cd /app
+    chown -R www-data:www-data ./
+    chmod -R +x ./
+    pip install -r requirements.txt 
+    python3.6 manage.py makemigrations
+    python3.6 manage.py migrate
+    python3.6 manage.py collectstatic --no-input
+cd /static 
+    chown -R www-data:www-data ./
+    chmod -R +x ./
+cd /app
+
 # Apache gets grumpy about PID files pre-existing
 rm -f /usr/local/apache2/logs/httpd.pid
 
