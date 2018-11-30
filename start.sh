@@ -33,8 +33,11 @@ cd /app
     chmod -R +x ./
     pip install -r requirements.txt
     pip uninstall --yes celery
-cd celery-master/
-    python3.6 setup.py install 
+if [-d celery-master]
+then 
+    cd celery-master/
+        python3.6 setup.py install 
+fi
 cd ..
     python3.6 manage.py makemigrations
     python3.6 manage.py migrate
