@@ -6,7 +6,7 @@ RUN apt-get update \
     wget tar g++ make zlib1g zlib1g-dev \
     build-essential build-essential checkinstall libreadline-gplv2-dev \
     libncursesw5-dev libsqlite3-dev tk-dev libgdbm-dev libc6-dev \
-    libbz2-dev libssl-dev\
+    libbz2-dev libssl-dev \
     && chmod +x /scripts/start.sh 
 
 RUN wget https://www.python.org/ftp/python/3.6.0/Python-3.6.0.tgz \
