@@ -40,9 +40,10 @@ cd /static
     chmod -R +x ./
 if [ ! -d /app/media ]
 then 
-    mkdir -p /app/media/posts
-    mkdir -p /app/media/events
-fi
+    mkdir /app/media
+    mkdir /app/media/posts
+    mkdir /app/media/events
+fi 
 cd /app/media
     chown -R www-data:www-data ./
     chmod -R +x ./
