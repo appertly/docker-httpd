@@ -38,11 +38,10 @@ cd /app
 cd /static 
     chown -R www-data:www-data ./
     chmod -R +x ./
-if [ ! -d /app/media ]
+if [ ! -d /app/media/posts || ! -d /app/media/events ]
 then 
-    mkdir /app/media
-    mkdir /app/media/posts
-    mkdir /app/media/events
+    mkdir -p /app/media/posts
+    mkdir -p /app/media/events
 fi 
 cd /app/media
     chown -R www-data:www-data ./
