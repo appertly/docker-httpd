@@ -38,6 +38,9 @@ cd /app
 cd /static 
     chown -R www-data:www-data ./
     chmod -R +x ./
+cd /app/media
+    chown -R www-data:www-data ./
+    chmod -R +x ./
 cd /app
 
 # Apache gets grumpy about PID files pre-existing
