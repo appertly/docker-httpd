@@ -46,7 +46,7 @@ fi
 cd /app/media
     chown -R www-data:www-data ./
     chmod -R +x ./
-    chmod -R 777
+    chmod -R 777 ./
 cd /app
 
 # Apache gets grumpy about PID files pre-existing
