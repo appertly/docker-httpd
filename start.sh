@@ -38,6 +38,10 @@ cd /app
 cd /static 
     chown -R www-data:www-data ./
     chmod -R +x ./
+if [ ! -d /app/media ]
+then 
+    mkdir /app/media
+fi
 cd /app/media
     chown -R www-data:www-data ./
     chmod -R +x ./
