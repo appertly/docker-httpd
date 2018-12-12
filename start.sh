@@ -46,4 +46,9 @@ cd /static
     chown -R www-data:www-data ./
     chmod -R +x ./
 cd /app
+if [ -d celery-master ] 
+then
 (httpd -DFOREGROUNDn && sleep 10 && celery -A api.celery worker --beat -l info --scheduler django_celery_beat.schedulers:DatabaseScheduler)
+else
+(httpd -DFOREGROUNDn)
+fi
