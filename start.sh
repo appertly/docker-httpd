@@ -19,7 +19,7 @@ then
     -days 3650 -nodes -sha256 2>/dev/null
 fi
 
-update-ca-certificates >/dev/null
+update-ca-certificates 2>/dev/null
 
 # Apache gets grumpy about PID files pre-existing
 rm -f /usr/local/apache2/logs/httpd.pid
