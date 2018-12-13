@@ -50,7 +50,7 @@ if [ -d celery-master ]
 then
 (httpd -DFOREGROUNDn && sleep 10 && celery -A api.celery worker --beat -l info --scheduler django_celery_beat.schedulers:DatabaseScheduler)
 else
-exec httpd -DFOREGROUNDn
+exec httpd -DFOREGROUND
 fi
 
 
