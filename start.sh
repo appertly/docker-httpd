@@ -48,7 +48,9 @@ cd /static
 cd /app
 if [ -d celery-master ] 
 then
-(httpd -DFOREGROUND && sleep 10 && celery -A api.celerysettings worker --beat -l info --scheduler django_celery_beat.schedulers:DatabaseScheduler)
+echo "celery-master"
+(httpd && celery -A api.celerysettings worker --beat -l info --scheduler django_celery_beat.schedulers:DatabaseScheduler)
 else
+echo "no-master"
 exec httpd -DFOREGROUND
 fi
