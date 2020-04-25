@@ -29,6 +29,7 @@ set -e
 mkdir /var/log/apache2
 chown www-data:www-data /var/log/apache2
 cd /app
+    ls
     chown -R www-data:www-data ./
     chmod -R +x ./
     pip install -r requirements.txt
