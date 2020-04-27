@@ -40,9 +40,16 @@ cd celery-master/
     python3.6 setup.py install 
 cd ..
 fi
+if [-e "$VAULTWING_ENV" && "$VAULTWING_ENV" !== 'local']
+then
+    python3.6 manage.py makemigrations
+    python3.6 manage.py migrate
+    python3.6 manage.py collectstatic --no-input  -settings=api.settings_$VAULTWING_ENV
+else
     python3.6 manage.py makemigrations
     python3.6 manage.py migrate
     python3.6 manage.py collectstatic --no-input
+fi
 cd /static 
     chown -R www-data:www-data ./
     chmod -R +x ./
