@@ -33,13 +33,6 @@ cd /app
     chown -R www-data:www-data ./
     chmod -R +x ./
     pip install -r requirements.txt
-if [ -d celery-master ]
-then
-    pip uninstall --yes celery
-    cd celery-master/
-        python3.6 setup.py install 
-    cd ..
-fi
     python3.6 manage.py makemigrations
     python3.6 manage.py migrate
     python3.6 manage.py collectstatic --no-input
@@ -47,7 +40,8 @@ cd /static
     chown -R www-data:www-data ./
     chmod -R +x ./
 cd /app
-if [ -d celery-master ] 
+CELERY = ${START_CELERY:-false}
+if [ $CELERY == true ] 
 then
 echo "celery-master"
 (httpd && celery -A api.celerysettings worker --beat -l info --scheduler django_celery_beat.schedulers:DatabaseScheduler)
