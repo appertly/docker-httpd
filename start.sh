@@ -33,13 +33,6 @@ cd /app
     chown -R www-data:www-data ./
     chmod -R +x ./
     pip install -r requirements.txt
-    pip uninstall --yes celery
-if [ -d celery-master ]
-then
-cd celery-master/
-    python3.6 setup.py install 
-cd ..
-fi
     python3.6 manage.py makemigrations
     python3.6 manage.py migrate
     python3.6 manage.py collectstatic --no-input
